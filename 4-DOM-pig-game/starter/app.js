@@ -10,12 +10,39 @@ GAME RULES:
 */
 var scores, roundScore, activePlayer;
 
-
-scores = [0, 0];
-roundScore = 0;
-activePlayer = 0;//0 is first player and 1 is second player by making it 0 and 1 we can use this value to check score in scores[]
+//Start a new game
 newGame();
 
+//resets the game
+function newGame(){
+    scores = [0, 0];
+    roundScore = 0;
+    activePlayer = 0;//0 is first player and 1 is second player by making it 0 and 1 we can use this value to check score in scores[]
+    document.querySelector('.dice').style.display = 'none'; //hiding the Dice image
+    document.getElementById('score-0').textContent = 0;
+    document.getElementById('score-1').textContent = 0;
+    document.getElementById('current-0').textContent = 0;
+    document.getElementById('current-1').textContent = 0;
+    document.querySelector('.player-0-panel').classList.add('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+    document.querySelector('#name-0').textContent = 'Player 1';
+    document.querySelector('#name-1').textContent = 'Player 2';
+    document.querySelector('.btn-roll').disabled = false;
+    document.querySelector('.btn-hold').disabled = false;
+}
+
+//Starts a new round of teh game.
+function playerSwap(){
+        roundScore = 0;
+        document.querySelector('#current-' + activePlayer).textContent = 0;
+        //next player will get a chance
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+        document.querySelector('.dice').style.display = 'none';
+}
 
 //ROLL DICE BUTTON
 document.querySelector('.btn-roll').addEventListener('click', function () {
@@ -34,49 +61,41 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         roundScore += dice;
         currScore.textContent = roundScore;
     } else{//rolled a one so reset current roundScore
-        roundScore = 0;
-        currScore.textContent = 0;
-        //next player will get a chance
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
-        diceDOM.style.display = 'none';
+        playerSwap();
     }
 });
 
 //HOLD BUTTON
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    //hide Dice
+    //Hide Dice
     document.querySelector('.dice').style.display = 'none';
-    //add their current roundScore to the player's total score
+    
+    //Add their current roundScore to the player's total score
     scores[activePlayer] += roundScore;
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-    //reset their current round score
-    roundScore = 0;
-    document.querySelector('#current-' + activePlayer).textContent = 0;
     
-    //change to next player
-    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-    document.querySelector('.player-0-panel').classList.toggle('active');
-    document.querySelector('.player-1-panel').classList.toggle('active');
+    //Has the player won?
+    if(scores[activePlayer] >= 100) {
+       //Game over
+        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+        document.querySelector('.btn-roll').disabled = true;
+        document.querySelector('.btn-hold').disabled = true;
+        document.querySelector('#current-' + activePlayer).textContent = 0;
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+        document.querySelector('.dice').style.display = 'none';
 
-    
-    
+    } else {
+        //Game is not over, so keep playing.
+        //Change to next player
+        playerSwap();
+    }   
 });
-
-
 
 //NEW GAME BUTTON
 document.querySelector('.btn-new').addEventListener('click', newGame);
 
 
-function newGame(){
-    document.querySelector('.dice').style.display = 'none';//hiding the Dice image
-    document.getElementById('score-0').textContent = 0;
-    document.getElementById('score-1').textContent = 0;
-    document.getElementById('current-0').textContent = 0;
-    document.getElementById('current-1').textContent = 0;
-}
 
 
 
