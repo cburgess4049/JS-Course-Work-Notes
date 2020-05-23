@@ -64,7 +64,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
             document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
             playerSwap();
         }else{
-            //Increase score as it wasn't a one and 
+            //Increase score as it wasn't a one and two sixes weren't rolled in a row
             roundScore += dice;
             //Now that the round score has been updated save this dice roll as the previous dice roll
             previousRoll = dice;
@@ -85,8 +85,16 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     scores[activePlayer] += roundScore;
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
     
+    
+    //Get the final score input
+    var inputScore = document.querySelector('.final-score').value;
+    if(inputScore){ //if inputScore is 0, undefined, or null then this will evaluate to false
+        //if it is not undefined, 0, or null it doesn't need to do anything!
+    } else{
+       inputScore = 100;
+    }
     //Has the player won?
-    if(scores[activePlayer] >= 100) {
+    if(scores[activePlayer] >= inputScore) {
        //Game over
         document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
         document.querySelector('.btn-roll').disabled = true;
@@ -105,7 +113,6 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
 //NEW GAME BUTTON
 document.querySelector('.btn-new').addEventListener('click', newGame);
-
 
 
 
