@@ -8,7 +8,7 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
-var scores, roundScore, activePlayer, previousRoll;
+var scores, roundScore, activePlayer;
 
 //Start a new game
 newGame();
@@ -18,7 +18,8 @@ function newGame(){
     scores = [0, 0];
     roundScore = 0;
     activePlayer = 0;//0 is first player and 1 is second player by making it 0 and 1 we can use this value to check score in scores[]
-    document.querySelector('.dice').style.display = 'none'; //hiding the Dice image
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
     document.getElementById('score-0').textContent = 0;
     document.getElementById('score-1').textContent = 0;
     document.getElementById('current-0').textContent = 0;
@@ -41,37 +42,39 @@ function playerSwap(){
         activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
         document.querySelector('.player-0-panel').classList.toggle('active');
         document.querySelector('.player-1-panel').classList.toggle('active');
-        document.querySelector('.dice').style.display = 'none';
+        document.getElementById('dice-1').style.display = 'none';
+        document.getElementById('dice-2').style.display = 'none';
 }
 
 //ROLL DICE BUTTON
 document.querySelector('.btn-roll').addEventListener('click', function () {
     //generate a random number for the dice roll
-    var dice = Math.floor(Math.random() * 6) + 1;
+    var dice1 = Math.floor(Math.random() * 6) + 1;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
     
     //display the correct image of the dice
-    var diceDOM = document.querySelector('.dice');
-    diceDOM.src = 'dice-' + dice + '.png';
-    diceDOM.style.display = 'block';
+    document.getElementById('dice-1').style.display = 'block';
+    document.getElementById('dice-2').style.display = 'block';
+    document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
+    document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
     
     //Update the current round score if the roll was not a one.
     var currScore = document.querySelector('#current-' + activePlayer);//used to change current score for the active player
-    if(dice !== 1){
-        if(dice === 6 && previousRoll === dice) {//they rolled a 6 and last roll was a 6
-            //Reset entire score if it was a six and the previously rolled a 6
+    if(dice1 !== 1 && dice2 !== 1){//Neither die were 1
+        if(dice1 === 6 && dice2 === 6){//This player rolled a double six
+            //reset their score and it is now next players turn.
             scores[activePlayer] = 0;
             roundScore = 0;
             document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-            playerSwap();
-        }else{
-            //Increase score as it wasn't a one and two sixes weren't rolled in a row
-            roundScore += dice;
-            //Now that the round score has been updated save this dice roll as the previous dice roll
-            previousRoll = dice;
+            playerSwap();            
         }
-        currScore.textContent = roundScore;
-    } else{//rolled a one so reset current roundScore
-        previousRoll = 1;
+        else{//A double six was not rolled.
+            //Increase score as it wasn't a one and two sixes weren't rolled in a row
+            roundScore += dice1;
+            roundScore += dice2;
+            currScore.textContent = roundScore;
+        }
+    } else{ //a one was rolled
         playerSwap();
     }
 });
@@ -102,7 +105,8 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
         document.querySelector('#current-' + activePlayer).textContent = 0;
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
         document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-        document.querySelector('.dice').style.display = 'none';
+        document.getElementById('dice-1').style.display = 'none';
+        document.getElementById('dice-2').style.display = 'none';
 
     } else {
         //Game is not over, so keep playing.
