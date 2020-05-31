@@ -52,9 +52,6 @@ console.log(num instanceof Object);//FALSE num is a primitive not an Object
 
 
 
-
-
-
 console.log('Begin Lecture 63');
 
 //Object.create
@@ -64,16 +61,16 @@ var personProto = {
     }
 };
 
-var james = Object.create(personProto);
-james.name = 'James';
-james.yearBorn = 1991;
-james.job = 'teacher';
+var marissa = Object.create(personProto);
+marissa.name = 'Marissa';
+marissa.yearBorn = 1996;
+marissa.job = 'Tech Consultant';
 
 
-var jane = Object.create(personProto, {
-    name: { value: 'Jane'},
-    yearBorn: { value: 1969},
-    job: { value: 'designer'}
+var Connor = Object.create(personProto, {
+    name: { value: 'Connor'},
+    yearBorn: { value: 1996},
+    job: { value: 'Teacher'}
 });
 
 
