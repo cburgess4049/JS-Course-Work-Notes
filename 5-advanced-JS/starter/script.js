@@ -12,7 +12,6 @@ var Person = function(name, yearBorn, job) {
     this.name = name;
     this.yearBorn = yearBorn;
     this.job = job;
-
 };
 
 //Inheritance of a method
@@ -51,7 +50,7 @@ var num = 2;
 console.log(num instanceof Object);//FALSE num is a primitive not an Object
 
 
-
+//Marking where Lecture 63 begins
 console.log('Begin Lecture 63');
 
 //Object.create
