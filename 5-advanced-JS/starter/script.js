@@ -73,5 +73,98 @@ var Connor = Object.create(personProto, {
 });
 
 
+//Marking where Lecture 64 begins
+console.log('Begin Lecture 64 - Primitives vs Objects');
+
+//Primitives hold the actual data as opposed to holding a reference to data.
+var a = 23;
+var b = a;
+
+a = 46;
+console.log('a: ' + a + '  b: ' +  b);
+
+//Objects are different in that they do not hold the data
+//they simply hold a reference that points to the data.
+//object1 and object2 both hold the same reference which points to the same data
+
+var object1 = {
+    name: 'John',
+    age: 26
+};
+var object2 = object1;
+
+object1.age = 30;
+
+console.log('Object 1 age: ' + object1.age);
+console.log('Object 2 age: ' + object2.age);
+
+//Functions
+var age = 23;
+var obj = {
+    name: 'Connor',
+    city: 'Naples'
+};
 
 
+//b will contain the same reference as the original obj object
+//Therefore, it will change the data the same way obj can/will
+//as a will hold a primitive it has a different set of data to the
+//originally passed data from the age variable.
+function change (a, b) {
+    a = 30;
+    b.city = 'San Fran'; 
+}
+
+change(age, obj);
+console.log('Age : ' + age + ' City: ' + obj.city);
+
+
+
+
+
+
+//Marking where Lecture 65 begins
+console.log('Begin Lecture 65 - Passing Functions as Arguments');
+
+var years = [1990, 1965, 1996, 2005, 2019];
+
+function arrCalc(arr, fn) {
+    var arrResult = [];
+    for(var i = 0; i < arr.length; i++){
+        arrResult.push(fn(arr[i]));
+    }
+    return arrResult;
+}
+
+function calcAge(year) {
+    return 2020 - year;
+}
+
+function isAdult(age) {
+    return age >= 21;
+}
+
+function maxHeart(age) {
+    if(age >= 18 && age <= 81){
+       return Math.round(206.9 - (0.67 * age));
+    } else{
+       return -1;
+    }
+    
+}
+
+var agesArr = arrCalc(years, calcAge);
+console.log(agesArr);
+
+var fullAges = arrCalc(agesArr, isAdult); 
+console.log(fullAges);
+
+
+var heartRates = arrCalc(agesArr, maxHeart);
+console.log(heartRates);
+
+
+
+
+//Marking where Lecture 66 begins
+console.log('Begin Lecture 66 - Functions Returning Functions');
