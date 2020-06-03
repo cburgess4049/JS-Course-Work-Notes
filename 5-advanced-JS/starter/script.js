@@ -128,6 +128,8 @@ console.log('Begin Lecture 65 - Passing Functions as Arguments');
 
 var years = [1990, 1965, 1996, 2005, 2019];
 
+//The below function will call the passed function for every element in the array
+//It will return the resulting array once completed
 function arrCalc(arr, fn) {
     var arrResult = [];
     for(var i = 0; i < arr.length; i++){
@@ -136,6 +138,8 @@ function arrCalc(arr, fn) {
     return arrResult;
 }
 
+//The 3 functions below can be used along with arrCalc()
+//to create a new array with processed data.
 function calcAge(year) {
     return 2020 - year;
 }
@@ -168,3 +172,79 @@ console.log(heartRates);
 
 //Marking where Lecture 66 begins
 console.log('Begin Lecture 66 - Functions Returning Functions');
+
+
+function interviewQuest(job) {
+    if (job === 'designer'){
+            return function(name) {
+                console.log(name + ', can you please explain what UX design is?');
+        }
+        } else if (job === 'teacher'){
+                return function(name)  {
+                    console.log('What subject do you teach, ' + name + '?');
+                }  
+        } else {
+            return function(name){
+                console.log('Hello ' + name + ', what do you do?');
+            }
+        }
+}
+
+var john = {
+    name: 'John',
+    job: 'teacher'
+}
+
+var johnIntQuest = interviewQuest(john.job);
+johnIntQuest(john.name);
+
+var designerQuestion = interviewQuest('designer');
+designerQuestion('Janet');
+
+
+//Marking where Lecture 67 begins
+console.log('Begin Lecture 67 - Immediately Invoked Function Expression');
+
+
+//function game() {
+//    var score = Math.random() * 10;
+//    
+//    console.log(score >= 5);
+//}
+//
+//game();
+
+//By using IIFE you are creating a new scope to keep the data seperate and private
+(function () {
+    var score = Math.random() * 10;
+    console.log(score >= 5);
+}
+)();
+
+//console.log(score);
+
+//TRUE
+(function (goodLuck) {
+    var score = Math.random() * 10;
+    console.log(score >= 5 - goodLuck);
+}
+)(5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
