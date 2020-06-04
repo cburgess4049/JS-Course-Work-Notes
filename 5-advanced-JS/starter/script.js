@@ -292,8 +292,8 @@ intQuestJonas('designer')('Thomas');
 
 
 
-//Marking where Lecture 68 begins
-console.log('Begin Lecture 68 - Bind, Call and Apply');
+//Marking where Lecture 69 begins
+console.log('Begin Lecture 69 - Bind, Call and Apply');
 
 var connor = {
   name: 'Connor' ,
@@ -373,18 +373,62 @@ console.log(arrCalc(ages, isAdult.bind(this, 18)));
 
 
 
+//Marking where Lecture 70-72 begins
+console.log('Begin Lecture 70-72 - Coding Challenge 7');
+
+//My solution:
+var score = 0;
+var Question = function (question, answers, corrAnswer) {
+    this.question = question;
+    this.answers = answers;
+    this.corrAnswer = corrAnswer;
+    this.askQuestion = function () {
+        console.log(this.question);
+        for(var i = 0; i < this.answers.length; i++){
+            console.log(i + ': ' + this.answers[i]);
+        }
+    }
+    this.checkAnsewr = function (ans, questions) {
+
+        if(ans == this.corrAnswer){
+           console.log('You are correct');
+           score++;
+           console.log(score);
+           var rand = Math.floor(Math.random() * (3));
+           questions[rand].askQuestion();
+           var answer = prompt('Please enter your answer');
+           questions[rand].checkAnsewr(answer, questions);
+        } else if (ans == 'exit') {
+            console.log('Game over! Your score was: ' + score)
+            //exit the game
+        }
+        else {
+            console.log('How could you get it wrong???? :(');
+            console.log(score);
+            var rand = Math.floor(Math.random() * (3));
+            questions[rand].askQuestion();
+            var answer = prompt('Please enter your answer');
+            questions[rand].checkAnsewr(answer, questions);
+        }
+    }
+};
+
+
+var question1 = new Question('What color hair does Connor have?', ['Black', 'Blue', 'Brown'], 2);
+var question2 = new Question('What color eyes does Connor have?', ['Black', 'Blue', 'Brown'], 2);
+var question3 = new Question('Is Marissa Lee the greatest?', ['Yes', 'No'], 0);
+
+var questions = [question1, question2, question3];
+
+console.log(questions);
+var rand = Math.floor(Math.random() * (3));
+questions[rand].askQuestion();
+var ans = prompt('Please enter your answer');
+questions[rand].checkAnsewr(ans, questions);
 
 
 
-
-
-
-
-
-
-
-
-
+//Jonas' Solution
 
 
 
