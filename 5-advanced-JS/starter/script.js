@@ -295,6 +295,99 @@ intQuestJonas('designer')('Thomas');
 //Marking where Lecture 68 begins
 console.log('Begin Lecture 68 - Bind, Call and Apply');
 
+var connor = {
+  name: 'Connor' ,
+  age: 23,
+  job: 'teacher',
+  presentation: function(style, timeOfDay) {
+      if (style === 'formal') {
+          console.log('Good ' + timeOfDay + ' Ladies and Gentlemen! I\'m ' + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old.');
+      } else if (style === 'friendly') {
+          console.log('Hey!  What\'s up?  I\'m ' + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + 'years old. Have a nice ' + timeOfDay + '.');       
+      }
+  }
+    
+};
+
+connor.presentation('formal', 'Morning');
+connor.presentation('friendly', 'Morning');
+
+
+var emily = {
+    name: 'Emily',
+    age: 35,
+    job: 'designer'
+}
+
+//---------------CALL---------------
+//Using call to allow the emily object to borrow the presentation
+//method from connor.  The call method allows you to set the this 
+//variable in the first argument.
+connor.presentation.call(emily, 'formal', 'Evening');
+
+//---------------APPLY---------------
+//Will not work because our presentation function is not expecting an array
+//Apply method allows objects to borrow methods while passing through arrays
+//connor.presentation.apply(emily, ['friendly', 'Afternoon']);
+
+//---------------BIND---------------
+//Bind generates a copy of the function rather than immediately invoke it
+
+//This will give access to the method that will have the context of
+//connor for its this and will have its style parameter/argument set to friendly.
+//it will still require the timeOfDay argument to be passed through when invoked.
+var connorFriendly = connor.presentation.bind(connor, 'friendly');
+connorFriendly('Night');
+
+var emilyFormNight = connor.presentation.bind(emily, 'formal', 'Night');
+emilyFormNight();
+
+
+var years = [1996, 1990, 1901, 1565, 2005];
+
+
+//The below function will call the passed function for every element in the array
+//It will return the resulting array once completed
+function arrCalc(arr, fn) {
+    var arrResult = [];
+    for(var i = 0; i < arr.length; i++){
+        arrResult.push(fn(arr[i]));
+    }
+    return arrResult;
+}
+
+//The 3 functions below can be used along with arrCalc()
+//to create a new array with processed data.
+function calcAge(year) {
+    return 2020 - year;
+}
+
+function isAdult(limit, age) {
+    return age >= limit;
+}
+
+var ages = arrCalc(years, calcAge);
+
+console.log(arrCalc(ages, isAdult.bind(this, 18)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
