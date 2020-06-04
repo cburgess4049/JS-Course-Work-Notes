@@ -128,6 +128,8 @@ console.log('Begin Lecture 65 - Passing Functions as Arguments');
 
 var years = [1990, 1965, 1996, 2005, 2019];
 
+//The below function will call the passed function for every element in the array
+//It will return the resulting array once completed
 function arrCalc(arr, fn) {
     var arrResult = [];
     for(var i = 0; i < arr.length; i++){
@@ -136,6 +138,8 @@ function arrCalc(arr, fn) {
     return arrResult;
 }
 
+//The 3 functions below can be used along with arrCalc()
+//to create a new array with processed data.
 function calcAge(year) {
     return 2020 - year;
 }
@@ -166,7 +170,6 @@ console.log(heartRates);
 
 //Marking where Lecture 66 begins
 console.log('Begin Lecture 66 - Functions Returning Functions');
-
 
 
 function interviewQuest(job) {
@@ -227,6 +230,7 @@ console.log('Begin Lecture 67 - Immediately Invoked Function Expression');
 
 
 
+<<<<<<< HEAD
 //Marking where Lecture 68 begins
 console.log('Begin Lecture 68 - Closures');
 
@@ -289,8 +293,11 @@ intQuestJonas('designer')('Thomas');
 
 
 
+
+
 //Marking where Lecture 68 begins
 console.log('Begin Lecture 68 - Bind, Call and Apply');
+
 
 
 
