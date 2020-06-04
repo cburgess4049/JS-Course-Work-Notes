@@ -229,8 +229,6 @@ console.log('Begin Lecture 67 - Immediately Invoked Function Expression');
 )(5);
 
 
-
-<<<<<<< HEAD
 //Marking where Lecture 68 begins
 console.log('Begin Lecture 68 - Closures');
 
