@@ -292,7 +292,6 @@ intQuestJonas('designer')('Thomas');
 
 
 
-
 //Marking where Lecture 68 begins
 console.log('Begin Lecture 68 - Bind, Call and Apply');
 
