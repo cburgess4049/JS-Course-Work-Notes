@@ -166,3 +166,134 @@ console.log(heartRates);
 
 //Marking where Lecture 66 begins
 console.log('Begin Lecture 66 - Functions Returning Functions');
+
+
+
+function interviewQuest(job) {
+    if (job === 'designer'){
+            return function(name) {
+                console.log(name + ', can you please explain what UX design is?');
+        }
+        } else if (job === 'teacher'){
+                return function(name)  {
+                    console.log('What subject do you teach, ' + name + '?');
+                }  
+        } else {
+            return function(name){
+                console.log('Hello ' + name + ', what do you do?');
+            }
+        }
+}
+
+var john = {
+    name: 'John',
+    job: 'teacher'
+}
+
+var johnIntQuest = interviewQuest(john.job);
+johnIntQuest(john.name);
+
+var designerQuestion = interviewQuest('designer');
+designerQuestion('Janet');
+
+
+//Marking where Lecture 67 begins
+console.log('Begin Lecture 67 - Immediately Invoked Function Expression');
+
+
+//function game() {
+//    var score = Math.random() * 10;
+//    
+//    console.log(score >= 5);
+//}
+//
+//game();
+
+//By using IIFE you are creating a new scope to keep the data seperate and private
+(function () {
+    var score = Math.random() * 10;
+    console.log(score >= 5);
+}
+)();
+
+//console.log(score);
+
+//TRUE
+(function (goodLuck) {
+    var score = Math.random() * 10;
+    console.log(score >= 5 - goodLuck);
+}
+)(5);
+
+
+
+//Marking where Lecture 68 begins
+console.log('Begin Lecture 68 - Closures');
+
+
+//An inner function always ahs access to variables and 
+//parameters of its outer function even after teh outer 
+//function has returned.
+function retirement (retirementAge) {
+    var a = ' years left until retirement.';
+    return function (yearBorn) {
+        var age = 2020 - yearBorn;
+        console.log((retirementAge - age) + a);
+    }
+}
+
+
+var retireUS = retirement(67);
+retireUS(1996);
+retirement(67)(1996);
+
+var retireGermany = retirement(65);
+retireGermany(1996);
+var retirePluto = retirement(1000);
+retirePluto(1996);
+
+//My solution:
+function intQuestionClos (job) {
+    var quest = '';
+    if (job === 'teacher') {
+      quest = ' What do you teach, ' ;
+    } else if (job === 'designer') {
+      quest = 'What is UX design, ' 
+    } else {
+      quest = 'What do you do, '     
+    }
+    return function (name) {
+        console.log(quest + name + '?');
+    }
+    
+}
+
+var jimQuest = intQuestionClos('teacher');
+jimQuest('Jim');
+
+//Jonas Solution:
+function intQuestJonas (job) {
+    return function (name) {
+        if (job === 'designer') {
+           console.log(name + ', can you please explain what UX design is?');  
+        } else if (job === 'teacher') {
+           console.log('What subject do you teach, ' + name + '?');        
+        } else {
+           console.log('Hello ' + name + ', what do you do?'); 
+        }
+    }
+}
+
+intQuestJonas('designer')('Thomas');
+
+
+
+
+//Marking where Lecture 68 begins
+console.log('Begin Lecture 68 - Bind, Call and Apply');
+
+
+
+
+
+
