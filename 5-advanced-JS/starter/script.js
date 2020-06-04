@@ -164,7 +164,5 @@ var heartRates = arrCalc(agesArr, maxHeart);
 console.log(heartRates);
 
 
-
-
 //Marking where Lecture 66 begins
 console.log('Begin Lecture 66 - Functions Returning Functions');
