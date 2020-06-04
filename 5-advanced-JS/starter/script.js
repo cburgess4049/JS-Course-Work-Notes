@@ -421,7 +421,7 @@ var question3 = new Question('Is Marissa Lee the greatest?', ['Yes', 'No'], 0);
 var questions = [question1, question2, question3];
 
 console.log(questions);
-var rand = Math.floor(Math.random() * (3));
+var rand = Math.floor(Math.random() * questions.length);
 questions[rand].askQuestion();
 var ans = prompt('Please enter your answer');
 questions[rand].checkAnsewr(ans, questions);
@@ -429,9 +429,130 @@ questions[rand].checkAnsewr(ans, questions);
 
 
 //Jonas' Solution
+/* Basic solution
+(function() {
+     function Question (question, answers, correct) {
+        this.question = question;
+        this.answers = answers;
+        this.correct = correct;
+    }
 
+    Question.prototype.askQuestion = function() {
+        console.log(this.question);
+        for (var i = 0; i < this.answers.length; i++) {
+            console.log(i + ': ' + this.answers[i]);
+        }
+    }
 
+    Question.prototype.checkAnswer = function(ans){
+        if (ans === this.correct) {
+            console.log('Correct!');
+        } else {
+            console.log('Incorrect');
+        }
+    }
 
+    var question1 = new Question ('What is the color of Connor\'s hair?',
+                                  ['Brown', 'Black', 'Gray'],
+                                  0);
+    var question2 = new Question ('What is the color of Connor\'s eye?',
+                                  ['Gray', 'Black', 'Brown'],
+                                  2);
+    var question3 = new Question ('Is 2 a number?',
+                                  ['no', 'yes'],
+                                  1);
+    var question4 = new Question ('Is Marissa the greatest?',
+                                  ['Hell yeah', 'I mean, I guess', 'Nahh'],
+                                  0);
+
+    var questions = [question1, question2, question3, question4];
+
+    var rand = Math.floor(Math.random() * questions.length);
+
+    questions[rand].askQuestion();
+
+    var answer = parseInt(prompt('Please answer the question'));
+
+    questions[rand].checkAnswer(answer);
+})();
+
+*/
+/* Expert Solution: */
+//(function() {
+//     function Question (question, answers, correct) {
+//        this.question = question;
+//        this.answers = answers;
+//        this.correct = correct;
+//    }
+//
+//    Question.prototype.askQuestion = function() {
+//        console.log(this.question);
+//        for (var i = 0; i < this.answers.length; i++) {
+//            console.log(i + ': ' + this.answers[i]);
+//        }
+//    }
+//
+//    Question.prototype.checkAnswer = function(ans){
+//        var sc;
+//        if (ans === this.correct) {
+//            console.log('Correct!');
+//            sc = keepScore(true);
+//        } else {
+//            console.log('Incorrect');
+//            sc = keepScore(false);
+//        }
+//        this.displayScore(sc);
+//    }
+//    
+//    Question.prototype.displayScore(score){
+//        console.log('Your current score is' + score);
+//        console.log('---------------');
+//    }
+//
+//    var question1 = new Question ('What is the color of Connor\'s hair?',
+//                                  ['Brown', 'Black', 'Gray'],
+//                                  0);
+//    var question2 = new Question ('What is the color of Connor\'s eye?',
+//                                  ['Gray', 'Black', 'Brown'],
+//                                  2);
+//    var question3 = new Question ('Is 2 a number?',
+//                                  ['no', 'yes'],
+//                                  1);
+//    var question4 = new Question ('Is Marissa the greatest?',
+//                                  ['Hell yeah', 'I mean, I guess', 'Nahh'],
+//                                  0);
+//    var questions = [question1, question2, question3, question4];
+//    
+//    function score (){
+//        var sc = 0;
+//        return function(correct){
+//            if(correct){
+//               sc++;
+//            }
+//                return sc;
+//        }
+//    }
+//    
+//    var keepScore = score();
+//    
+//    function nextQuestion(){
+//        
+//
+//        var rand = Math.floor(Math.random() * questions.length);
+//
+//        questions[rand].askQuestion();
+//
+//        var answer =  promt('Please answer the question.');
+//        
+//        if(answer !== 'exit') {
+//            questions[rand].checkAnswer(paseInt(answer));
+//            nextQuestion();
+//        }
+//
+//    }
+//    //Initiate the game
+//    nextQuestion();
+//})();
 
 
 
