@@ -204,14 +204,6 @@ designerQuestion('Janet');
 console.log('Begin Lecture 67 - Immediately Invoked Function Expression');
 
 
-//function game() {
-//    var score = Math.random() * 10;
-//    
-//    console.log(score >= 5);
-//}
-//
-//game();
-
 //By using IIFE you are creating a new scope to keep the data seperate and private
 (function () {
     var score = Math.random() * 10;
@@ -475,7 +467,6 @@ questions[rand].checkAnsewr(ans, questions);
 })();
 
 */
-
 
 
 
