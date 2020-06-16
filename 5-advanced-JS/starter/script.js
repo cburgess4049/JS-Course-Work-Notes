@@ -6,7 +6,6 @@ var connor = {
     job: 'teacher'
 };
 
-
 //constructor for the Person object
 var Person = function(name, yearBorn, job) {
     this.name = name;
@@ -71,6 +70,8 @@ var Connor = Object.create(personProto, {
     yearBorn: { value: 1996},
     job: { value: 'Teacher'}
 });
+
+
 
 
 //Marking where Lecture 64 begins
