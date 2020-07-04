@@ -119,7 +119,7 @@ console.log(3);
 //LECTURE 106 STRINGS
 
 
-/* EXAMPLE 1 */
+/* EXAMPLE 1 
 
 let firstName = 'John';
 let lastName = 'Smith';
@@ -139,7 +139,7 @@ console.log('This is ' + firstName + ' ' + lastName + '. They were born in ' + y
 console.log(`This is ${firstName} ${lastName}. They were born in ${yearofBirth}. Today, he is ${calcAge(yearofBirth)} years old`);
 
 
-//New methods!!
+// New methods!!
 const n = `${firstName} ${lastName}`;
 console.log(n);
 
@@ -149,6 +149,44 @@ console.log(n.includes(' '));
 console.log(`${firstName} `.repeat(5));
 
 
+*/
+
+
+
+//LECTURE 107 ARROW FUNCTIONS
+// Arrow funcitons are quicker to write
+
+/*
+const years = [1990, 1965, 1982, 1937];
+
+//ES5
+
+var ages5 = years.map(function(curr){
+    return 2020- curr;
+});
+console.log(ages5);
+
+
+
+//ES6 ARROW FUNCTION EXAMPE
+// one argument and one line of code
+let ages6 = years.map(year => 2020 - year);
+
+console.log(ages6);
+
+//Two arguments and one line of code
+ages6 = years.map((el, index) => `Person ${index + 1} is ${2020-el} years old.`);
+console.log(ages6);
+
+//two arguments and multiple lines of code
+//If there are more lines of code the return function is no longer implicit and must be written out
+age6 = years.map((el, index) => {
+    const now = new Date().getFullYear();
+    const age = now - el;
+    return `Person ${index + 1} is ${2020-el} years old.`;
+});
+console.log(age6);
+*/
 
 
 
@@ -156,13 +194,87 @@ console.log(`${firstName} `.repeat(5));
 
 
 
+//LECTURE 107 ARROW FUNCTIONS: LEXICAL 'this' KEYWORD
+// Arrow functions do not have their own this keyword
+//They use the this keyword of the function they are written in
+
+/* 
+//ES5
+
+// The this.position and this.color will return undefined because it points withhin the function 
+// That is because this refers to the item returned by the querySelector, not the original clickMe function
+// A work around is to declare a variable that contains the this of the original function and use it in the event listener.
+var box5 = {
+    color: 'green',
+    position: 1,
+    clickMe: function() {
+        var self = this;
+        document.querySelector('.green').addEventListener('click', function(){
+            var str = 'This is box #' + self.position + ' and it is ' + self.color;
+            alert(str);
+        });
+    }
+}
+//box5.clickMe();
+
+//ES6
+const box6 = {
+    color: 'green',
+    position: 1,
+    clickMe: function()  {
+        document.querySelector('.green').addEventListener('click', () => {
+            var str = 'This is box #' + this.position + ' and it is ' + this.color;
+            alert(str); 
+        });
+    }
+}
+//box6.clickMe();
+
+
+// Example of this falling out of proper score again
+//// Rather than being scoped to the object using an arrow function in the property definition gives it the Window (or global) scope.
+//const box66 = {
+//    color: 'green',
+//    position: 1,
+//    clickMe: () => {
+//        document.querySelector('.green').addEventListener('click', () => {
+//            var str = 'This is box #' + this.position + ' and it is ' + this.color;
+//            alert(str); 
+//        });
+//    }
+//}
+//box66.clickMe();
 
 
 
+// Function constructor for a Person object
+function Person(name) {
+    this.name = name;
+}
+
+//ES5
+// By using the bind function a new function will be returned to the map with a manually defined this of the current Person object.
+Person.prototype.myFriends5 = function(friends) {
+    var arr = friends.map(function(el) {
+        return this.name + ' is friends with ' + el + '.';
+        
+    }.bind(this));
+    console.log(arr);
+}
+
+var friends = ['Bob', 'Jane', 'Mark']
+new Person('John').myFriends5(friends);
 
 
+//ES6
 
+Person.prototype.myFriends6 = function(friends) {
+    var arr = friends.map(el => `${this.name} is friends with ${el}.`);
+}
+var friends = ['Jim', 'Connor', 'Jimbo']
+new Person('Scott').myFriends5(friends);
 
+*/
 
 
 
