@@ -282,9 +282,85 @@ new Person('Scott').myFriends5(friends);
 
 
 
+//LECTURE 107 DESTRUCTURING
+// Destructuring is brekaing down an array or object into individual variables
+//ES5 
+var john = ['John', 26];
+var name5 = john[0];
+var age5 = john[1];
+
+//ES6
+const [name6, age6] = ['John', 26];
+
+console.log(name6);
+console.log(age6);
+
+const obj = {
+    firstName: 'John',
+    lastName: 'Smith'
+};
+
+const {firstName, lastName} = obj;
+console.log(firstName);
+console.log(lastName);
+
+const {firstName: a, lastName: b} = obj;
+console.log(a);
+console.log(b);
+
+
+function calcAgeRetirement(year){
+    const age = new Date().getFullYear() - year;
+    return  [age, 65 - age];
+} 
+const [connorAge, connorRetire]= calcAgeRetirement(1996);
+console.log(connorRetire);
+console.log(connorAge);
 
 
 
+
+
+
+
+//LECTURE 108 ARRAYS IN ES6
+
+const boxes = document.querySelectorAll('.box');
+
+//ES5
+var boxesArr5 = Array.prototype.slice.call(boxes);
+boxesArr5.forEach(function(curr) {
+    curr.style.backgroundColor = 'dodgerblue';
+});
+
+//ES6
+
+var boxesArr6 = Array.from(boxes)
+Array.from(boxes).forEach( curr => curr.style.backgroundColor = 'dogerblue');
+
+
+//ES5
+//for(var i = 0; i < boxesArr5.length; i++){
+//    if(boxesArr5[i].className === 'box blue'){
+//        continue;
+//        //break;
+//    } else{
+//        boxesArr5[i].textContent = 'I changed to blue blue!';
+//    }
+//}
+
+//ES6
+for (const curr of boxesArr6) {
+    if(curr.className.includes('blue')){
+        continue;
+        //break;
+    } else{
+        curr.textContent = 'I changed to a diferent color!';
+    } 
+}
+
+
+//ES5
 
 
 
