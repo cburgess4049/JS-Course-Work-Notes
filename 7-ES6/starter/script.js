@@ -499,7 +499,45 @@ console.log(emily);
 
 
 
-//LECTURE 114 DEFAULT PARAMETERS
+//LECTURE 114 MAPS
+// Hash map - Map string keys to arbitrary values
+// key value data structure
+// in maps you can use anything for the key.  Not just strings.  Can use numbers, strings, or booleans, or even funcitons or objects as keys.
+
+/*
+const question = new Map();
+question.set('question', 'What basketball team plays in Chicago?');
+question.set(1, 'Chicago bruins');
+question.set(2, 'Chicago Bulls');
+question.set(3, 'Chicago Hawks');
+question.set(4, 'Chicago Raptors');
+question.set('answer', 2);
+
+question.set(true, 'Congratulations, that is correct!');
+question.set(false, 'Sorry, that is the wrong answer!');
+
+//if(question.has(4)) {
+//    question.delete(4);
+//}
+
+//question.clear();
+
+// Can loop through Map
+question.forEach((value, key) => console.log(`This is ${key} and it is set to ${value}`));
+console.log(' ');
+
+console.log(question.get('question'));
+
+for (let [key, value] of question.entries()) {
+    if(typeof(key) === 'number'){
+        console.log(`${key}: ${value}`);
+    }
+}
+//alert(question.get(prompt(question.get('question')) === question.get(question.get('correct'))));
+
+const ans = parseInt(prompt('What is the correct answer?'));
+console.log(question.get(ans === question.get('answer')));
+*/
 
 
 
@@ -507,17 +545,124 @@ console.log(emily);
 
 
 
+//LECTURE 115 CLASSES
+//Classes are not hoised!  This is unlike function constructors
+
+/*
+//ES5 - Function constructors
+var Person5 = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
+
+Person5.prototype.calculateAge = function (){
+    var age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+}
+var jimmy = new Person5('Jimmy', 1996, 'Teacher');
+jimmy.calculateAge();
+
+
+
+//ES6 - Classes
+class Person6 {
+    
+    constructor (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+    
+    calculateAge() {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(age);
+        
+    }
+    
+    static greeting() {
+        console.log('Hey There!');
+    }
+}
+
+var connor = new Person6('Connor', 1996, 'Teacher');
+connor.calculateAge();
+Person6.greeting();
+*/
 
 
 
 
 
 
+//LECTURE 115 CLASSES WITH SUBCLASSES
 
+//ES5
 
+var Person5 = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
 
+Person5.prototype.calculateAge = function (){
+    var age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+}
 
+var Athlete5 = function(name, yearOfBirth, job, olympicGames, medals) {
+    Person5.call(this, name, yearOfBirth, job);
+    this.olympicGames = olympicGames;
+    this.medals = medals;
+}
 
+Athlete5.prototype = Object.create(Person5.prototype);
+
+Athlete5.prototype.wonMedal = function() {
+    this.medals++;
+    console.log(this.medals);
+}
+
+var michael5 = new Athlete5('Michael', 1985, 'swimmer', 4, 28);
+michael5.calculateAge();
+michael5.wonMedal();
+
+//ES6
+
+class Person6 {
+    
+    constructor (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+    
+    calculateAge() {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(`${this.name} is ${age} years old.`);
+        
+    }
+}
+
+var jimmy = new Person6('Jimmy', 1996, 'Teacher');
+jimmy.calculateAge();
+
+class Athelete6 extends Person6 {
+    
+    constructor(name, yearOfBirth, job, olympicGames, medals){
+        super(name, yearOfBirth, job);
+        this.olympicGames = olympicGames;
+        this.medals = medals;
+    }
+    wonMedal() {
+        this.medals++;
+        console.log(this.medals);
+    }
+}
+
+var michael6 = new Athelete6('Michael', 1985, 'Swimmer', 4, 28);
+michael6.calculateAge();
+michael6.wonMedal();
 
 
 
