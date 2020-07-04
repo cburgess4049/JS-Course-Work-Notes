@@ -194,7 +194,7 @@ console.log(age6);
 
 
 
-//LECTURE 107 ARROW FUNCTIONS: LEXICAL 'this' KEYWORD
+//LECTURE 108 ARROW FUNCTIONS: LEXICAL 'this' KEYWORD
 // Arrow functions do not have their own this keyword
 //They use the this keyword of the function they are written in
 
@@ -282,7 +282,9 @@ new Person('Scott').myFriends5(friends);
 
 
 
-//LECTURE 107 DESTRUCTURING
+//LECTURE 109 DESTRUCTURING
+/*
+
 // Destructuring is brekaing down an array or object into individual variables
 //ES5 
 var john = ['John', 26];
@@ -316,15 +318,14 @@ function calcAgeRetirement(year){
 const [connorAge, connorRetire]= calcAgeRetirement(1996);
 console.log(connorRetire);
 console.log(connorAge);
+*/
 
 
 
 
 
-
-
-//LECTURE 108 ARRAYS IN ES6
-
+//LECTURE 110 ARRAYS IN ES6
+/*
 const boxes = document.querySelectorAll('.box');
 
 //ES5
@@ -361,6 +362,171 @@ for (const curr of boxesArr6) {
 
 
 //ES5
+var ages = [12, 17, 4, 21, 14, 11];
+
+var full = ages.map(function(curr) {
+    return curr >= 21;
+});
+console.log(full);
+
+console.log(full.indexOf(true));
+console.log(ages[full.indexOf(true)]);
+
+
+//ES6
+console.log(ages.findIndex(curr => curr >= 21));
+console.log(ages[ages.findIndex(curr => curr >= 21)]);
+
+*/
+
+
+
+
+
+
+
+//LECTURE 112 Spread operator
+
+/*
+function addFourAges (a, b, c, d){
+    return a + b + c + d;
+}
+
+var sum1 = addFourAges(18, 30 ,12 ,21);
+console.log(sum1);
+
+
+
+//ES5
+var ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages);
+console.log(sum2);
+
+//ES6
+var sum3 = addFourAges(...ages);
+console.log(sum3);
+
+
+
+const familySmith = ['John', 'Jane', 'Mark'];
+const familyMiller = ['Mary', 'Bob', 'Ann'];
+const bigFamily = [...familySmith, ...familyMiller];
+console.log(bigFamily);
+
+
+const h = document.querySelector('h1');
+
+const boxesNew = document.querySelectorAll('.box');
+const all = [h, ...boxesNew];
+console.log(all);
+
+Array.from(all).forEach(curr => curr.style.color = 'DarkSlateBlue');
+*/
+
+
+
+
+
+
+
+//LECTURE 109 REST PARAMETERS
+// Rest parameters allow us to pass an arbitrary number of agruments into a function and use them in that function.
+//Rest paramenters are the exact oposite of the Spread operator.
+//Rather than spread it out it joins elements into one object
+
+/*
+//ES5
+function isFullAge5(limit) {
+    console.log(arguments);
+    var argsArr = Array.prototype.slice.call(arguments, 1);
+    
+    argsArr.forEach(function(curr) {
+        console.log(2020 - curr >= limit);
+    });
+}
+isFullAge5(21, 1990, 2002, 1965);
+isFullAge5(21, 1990, 2002, 1965, 2015, 1969);
+
+console.log('');
+
+//ES6
+function isFullAge6(limit, ...years) {
+    years.forEach(curr => console.log((2020 - curr) >= limit));
+}
+isFullAge6(21, 1990, 2002, 1965, 2015, 1969);
+*/
+
+
+
+
+
+
+
+//LECTURE 113 DEFAULT PARAMETERS
+
+/*
+//ES5
+
+//function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+//    lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+//    nationality === undefined ? nationality = 'American' : nationality = nationality;
+//    
+//    
+//    this.firstName = firstName;
+//    this.lastName = lastName;
+//    this.yearOfBirth = yearOfBirth;
+//    this.nationality = nationality;
+//}
+
+
+
+function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'American') {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearOfBirth = yearOfBirth;
+    this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1990);
+console.log(john);
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'Spanish');
+console.log(emily);
+*/
+
+
+
+
+
+
+
+//LECTURE 114 DEFAULT PARAMETERS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
