@@ -81,22 +81,41 @@
                 }, 1500, publisher);
             })
         }
+        //without Asynch/Await
+        // getIDs
+        // .then( IDs => {
+        //     console.log(IDs);
+        //     return getRecipe(IDs[2]);
+        // })
+        // .then(recipe => {
+        //     console.log(recipe);
+        //     return getRelated('Jonas');
+        // })
+        // .then(recipe2 => {
+        //     console.log(recipe2);
+        // })
+        // .catch(error => {
+        //     console.log('Error!!');
+        // });
 
-        getIDs
-        .then( IDs => {
+
+        async function getRecipesAW() {
+            //await stops the code from executing until the promis is fullfiled.
+            const IDs = await getIDs;
             console.log(IDs);
-            return getRecipe(IDs[2]);
-        })
-        .then(recipe => {
-            console.log(recipe);
-            return getRelated('Jonas');
-        })
-        .then(recipe2 => {
-            console.log(recipe2);
-        })
-        .catch(error => {
-            console.log('Error!!');
+
+            const recipe = await getRecipe(IDs[2]);
+            console.log(recipe)
+            const related = await getRelated('Connor Burgess');
+            console.log(related);
+            return recipe;
+        }
+        const rec = getRecipesAW()
+        .then(rec => {
+            console.log(`${rec} is the best ever`);
         });
+
+
     </script>
 </body>
 </html>
