@@ -597,6 +597,7 @@ Person6.greeting();
 
 //LECTURE 115 CLASSES WITH SUBCLASSES
 
+/*
 //ES5
 
 var Person5 = function(name, yearOfBirth, job) {
@@ -663,6 +664,79 @@ class Athelete6 extends Person6 {
 var michael6 = new Athelete6('Michael', 1985, 'Swimmer', 4, 28);
 michael6.calculateAge();
 michael6.wonMedal();
+*/
+
+
+
+
+
+
+//CODING CHALLENGE 8
+
+class Park {
+    constructor (name, buildYear, numOfTrees, area ){
+        this.name = name;
+        this.buildYear = buildYear;
+        this.numOfTrees = numOfTrees;
+        this.area = area;
+    }
+    
+    getDensity() {
+        return this.numOfTrees / this.area;
+    }
+}
+
+class Street {
+    constructor (name, buildYear, streetLength, size = 'normal' ){
+        this.name = name;
+        this.buildYear = buildYear;
+        this.streetLength = streetLength;
+        this.size = size;
+    }
+}
+
+
+console.log('----PARKS REPORT----');
+
+var parks = [];
+
+parks.push(new Park('Green Park', 1924, 985, 1.05));
+parks.push(new Park('National Park', 1945, 3469, 3));
+parks.push(new Park('Green Park', 1960, 369, .35));
+
+let sumYear = 0;
+parks.forEach(curr => sumYear += curr.buildYear);
+
+console.log(`Our ${parks.length} parks have an average of ${sumYear/parks.length} years.`);
+
+parks.forEach(curr => console.log(`${curr.name} has a tree density of ${curr.getDensity()} per square km.`));
+parks.forEach(curr => curr.numOfTrees > 1000 ? console.log(`${curr.name} has more than 1000 trees.`) : curr.numOfTrees);
+
+
+console.log('----STREETS REPORT----');
+
+var streets = [];
+
+streets.push(new Street('Ocean Avenue', 1999, 2.24, 'big'));
+streets.push(new Street('Evergreen Ave', 2008, .6345, 'small'));
+streets.push(new Street('4th Street', 2015, 1.8));
+streets.push(new Street('Sunset Boulevard', 1982, 3.1, 'huge'));
+
+let sumLength = 0;
+streets.forEach(curr => sumLength += curr.streetLength);
+
+console.log(`Our ${streets.length} streets have a total of ${sumLength}  km, with an average of ${sumLength/parks.length}`);
+streets.forEach(curr => console.log(`${curr.name}, built in ${curr.buildYear}, is a ${curr.size} street.`));
+
+
+
+
+
+
+
+
+
+
 
 
 
