@@ -51,69 +51,120 @@
         // getRecipe();
 
 
-        //PROMISE EXAMPLE
-        const getIDs = new Promise( (resolve, reject) => {
-            setTimeout( () => {
-                resolve([523, 883, 432, 974]);
-            }, 1500);
-        });
+        // //PROMISE EXAMPLE
+        // const getIDs = new Promise( (resolve, reject) => {
+        //     setTimeout( () => {
+        //         resolve([523, 883, 432, 974]);
+        //     }, 1500);
+        // });
         
-        const getRecipe = recID =>{
-            return new Promise((resolve, rejet) => {
-                setTimeout(ID => {
-                    const recipe = {
-                        title: 'Fresh Tomato pasta',
-                        publisher:'Jonas'
-                    };
-                    resolve(`${ID}: ${recipe.title}`);
-                }, 1500, recID);
-            });
-        };
+        // const getRecipe = recID =>{
+        //     return new Promise((resolve, rejet) => {
+        //         setTimeout(ID => {
+        //             const recipe = {
+        //                 title: 'Fresh Tomato pasta',
+        //                 publisher:'Jonas'
+        //             };
+        //             resolve(`${ID}: ${recipe.title}`);
+        //         }, 1500, recID);
+        //     });
+        // };
 
-        const getRelated = publisher => {
-            return new Promise((resolve, reject) => {
-                setTimeout(pub => {
-                    const recipe2 = {
-                            title: 'Italian Pizza',
-                            publisher: pub
-                        }
-                    resolve(`${recipe2.publisher}: ${recipe2.title}`);
-                }, 1500, publisher);
-            })
-        }
-        //without Asynch/Await
-        // getIDs
-        // .then( IDs => {
+        // const getRelated = publisher => {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(pub => {
+        //             const recipe2 = {
+        //                     title: 'Italian Pizza',
+        //                     publisher: pub
+        //                 }
+        //             resolve(`${recipe2.publisher}: ${recipe2.title}`);
+        //         }, 1500, publisher);
+        //     })
+        // }
+        // //without Asynch/Await
+        // // getIDs
+        // // .then( IDs => {
+        // //     console.log(IDs);
+        // //     return getRecipe(IDs[2]);
+        // // })
+        // // .then(recipe => {
+        // //     console.log(recipe);
+        // //     return getRelated('Jonas');
+        // // })
+        // // .then(recipe2 => {
+        // //     console.log(recipe2);
+        // // })
+        // // .catch(error => {
+        // //     console.log('Error!!');
+        // // });
+
+
+        // async function getRecipesAW() {
+        //     //await stops the code from executing until the promis is fullfiled.
+        //     const IDs = await getIDs;
         //     console.log(IDs);
-        //     return getRecipe(IDs[2]);
-        // })
-        // .then(recipe => {
-        //     console.log(recipe);
-        //     return getRelated('Jonas');
-        // })
-        // .then(recipe2 => {
-        //     console.log(recipe2);
-        // })
-        // .catch(error => {
-        //     console.log('Error!!');
+
+        //     const recipe = await getRecipe(IDs[2]);
+        //     console.log(recipe)
+        //     const related = await getRelated('Connor Burgess');
+        //     console.log(related);
+        //     return recipe;
+        // }
+        // const rec = getRecipesAW()
+        // .then(rec => {
+        //     console.log(`${rec} is the best ever`);
         // });
 
+        // fetch('https://cors-anywhere.herokuapp.com/https://metaweather.com/api/location/44418/')
+        // .then(response => console.log(result))
+        // .catch(err => console.log(err));
 
-        async function getRecipesAW() {
-            //await stops the code from executing until the promis is fullfiled.
-            const IDs = await getIDs;
-            console.log(IDs);
-
-            const recipe = await getRecipe(IDs[2]);
-            console.log(recipe)
-            const related = await getRelated('Connor Burgess');
-            console.log(related);
-            return recipe;
-        }
-        const rec = getRecipesAW()
-        .then(rec => {
-            console.log(`${rec} is the best ever`);
+        //Fetch and promises
+        fetch("https://api-nba-v1.p.rapidapi.com/seasons/", {
+	        "method": "GET",
+	        "headers": {
+		        "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+		        "x-rapidapi-key": "bec9166da9mshc65825fc4dddf78p19c1e6jsn30feec0b19e6"
+	        }
+        })
+        .then(response => {
+            console.log(response);
+            return response.json();
+        }).then(data =>{
+            console.log(data);
+            console.log(data.api.seasons[0]);
+        })
+        .catch(err => {
+	        console.log(err);
         });
+
+        //fetch and asynch/await
+        async function getSeasonYear(num){
+            try{
+                const res = await fetch("https://api-nba-v1.p.rapidapi.com/seasons/", {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                        "x-rapidapi-key": "bec9166da9mshc65825fc4dddf78p19c1e6jsn30feec0b19e6"
+                    }
+                    })
+                const data = await res.json();
+                return data.api.seasons[num]; 
+            } catch(error) {
+                alert(error);
+            }
+        }
+
+
+        getSeasonYear(0)
+        .then(year => {
+            console.log(year);
+        });
+        getSeasonYear(3)
+        .then(year => {
+            console.log(year);
+        });
+
 
 
     </script>
